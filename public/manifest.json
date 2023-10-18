@@ -1,11 +1,11 @@
 {
-  "theme_color":  "#000000",
+  "theme_color": "#000000",
   "background_color": "#000000",
   "display": "fullscreen",
   "scope": "/",
   "start_url": "/",
-  "name": "template app",
-  "short_name": "template-app",
+  "name": "atomic habits",
+  "short_name": "atomic-habits",
   "icons": [
     {
       "src": "/icon-192x192.png",
