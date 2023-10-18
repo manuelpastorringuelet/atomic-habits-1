@@ -1,12 +1,18 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import WelcomeModal from "@/components/welcome-modal";
 
 import { getFromLocalStorage } from "@/utils/localStorage";
 
 export default function Home() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
@@ -21,8 +27,12 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <WelcomeModal />
-      <h1>Welcome {username}!</h1>
-      <p>Your current process goal is: {processGoal}</p>
+      {isClient && (
+        <>
+          <h1>Welcome {username}!</h1>
+          <p>Your current process goal is: {processGoal}</p>
+        </>
+      )}
     </main>
   );
 }
