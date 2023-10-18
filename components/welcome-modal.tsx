@@ -1,11 +1,20 @@
-import { useState } from "react";
-
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 import WelcomeForm from "./welcome-form";
+import { getFromLocalStorage } from "@/utils/localStorage";
 
 function Modal() {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    // if there is a username and processGoal in local storage, close the modal
+    const username = getFromLocalStorage("username");
+    const processGoal = getFromLocalStorage("processGoal");
+
+    if (!username || !processGoal) {
+      setIsModalOpen(true);
+    }
+  }, []);
 
   const openModal = () => {
     setIsModalOpen(true);

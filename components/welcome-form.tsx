@@ -13,22 +13,28 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+// Import the functions from your TypeScript module
+import { saveToLocalStorage, getFromLocalStorage } from "@/utils/localStorage"; // Adjust the import path as needed
+
 const formSchema = z.object({
   username: z.string().min(2, {
     message: "Name must be at least 2 characters.",
   }),
-  processGoals: z.string().min(2, {
-    message: "Process Goals must be at least 2 characters.",
+  processGoal: z.string().min(2, {
+    message: "Process Goal must be at least 2 characters.",
   }),
 });
 
 const WelcomeForm = () => {
+  let username = getFromLocalStorage("username");
+  let processGoal = getFromLocalStorage("processGoal");
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
-      processGoals: "Exercise every day",
+      username: username ? username : "",
+      processGoal: processGoal ? processGoal : "Exercise every day",
     },
   });
 
@@ -36,13 +42,16 @@ const WelcomeForm = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    saveToLocalStorage("username", values.username);
+    saveToLocalStorage("processGoal", values.processGoal);
     console.log(values);
   }
 
   const { formState } = form;
 
-  const { isSubmitted } = formState;
-  if (!isSubmitted) {
+  const { isSubmitSuccessful } = formState;
+
+  if (!isSubmitSuccessful) {
     return (
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -61,7 +70,7 @@ const WelcomeForm = () => {
           />
           <FormField
             control={form.control}
-            name="processGoals"
+            name="processGoal"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
