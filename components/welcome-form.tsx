@@ -13,8 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-// Import the functions from your TypeScript module
-import { saveToLocalStorage, getFromLocalStorage } from "@/utils/localStorage"; // Adjust the import path as needed
+import useStore from "@/hooks/useStore";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -26,15 +25,13 @@ const formSchema = z.object({
 });
 
 const WelcomeForm = () => {
-  let username = getFromLocalStorage("username");
-  let processGoal = getFromLocalStorage("processGoal");
-
+  const { username, processGoal, setUsername, setProgressGoal } = useStore();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: username ? username : "",
-      processGoal: processGoal ? processGoal : "Exercise every day",
+      username: username,
+      processGoal: processGoal,
     },
   });
 
@@ -42,8 +39,8 @@ const WelcomeForm = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    saveToLocalStorage("username", values.username);
-    saveToLocalStorage("processGoal", values.processGoal);
+    setUsername(values.username);
+    setProgressGoal(values.processGoal);
     console.log(values);
   }
 
