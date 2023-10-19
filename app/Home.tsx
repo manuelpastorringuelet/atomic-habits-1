@@ -1,9 +1,6 @@
 "use client";
-
 import { useEffect, useState } from "react";
-
 import WelcomeModal from "@/components/welcome-modal";
-
 import useStore from "@/hooks/useStore";
 import Countdown from "@/components/countdown";
 
@@ -43,14 +40,7 @@ export default function Home() {
               <h2>
                 Day {dayNumber} of {processGoal}
               </h2>
-              <h3>
-                {percentageIncreased <= 1
-                  ? "You can do it!"
-                  : `${Math.round(
-                      percentageIncreased * 100,
-                    )}% increase since your first day!`}
-                {}
-              </h3>
+              <h3>{percentageIncreased}% increase from yesterday's process</h3>
             </>
           )}
           <Countdown />

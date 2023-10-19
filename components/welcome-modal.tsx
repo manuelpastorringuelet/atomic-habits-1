@@ -7,7 +7,6 @@ function Modal() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // if there is a username and processGoal in local storage, close the modal
     const username = getFromLocalStorage("username");
     const processGoal = getFromLocalStorage("processGoal");
 

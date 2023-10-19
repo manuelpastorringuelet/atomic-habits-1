@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Toaster, toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -41,7 +42,7 @@ const WelcomeForm = () => {
     // ✅ This will be type-safe and validated.
     setUsername(values.username);
     setProgressGoal(values.processGoal);
-    console.log(values);
+    toast.success("Welcome to Atomic Habits!");
   }
 
   const { formState } = form;
