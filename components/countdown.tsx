@@ -46,8 +46,10 @@ const Countdown = () => {
   }
 
   return (
-    <div className="flex flex-col space-y-10">
+    <div className="flex h-full  flex-col space-y-10">
       <CountdownCircleTimer
+        size={300}
+        strokeWidth={20}
         isPlaying={isPlaying}
         duration={Math.round(duration)}
         colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
@@ -56,13 +58,14 @@ const Countdown = () => {
       >
         {({ remainingTime }) => (
           <div>
-            <p>Time left: {remainingTime}</p>
+            <p className="text-4xl">{remainingTime}</p>
+            <span className="text-zinc-500">seconds left</span>
           </div>
         )}
       </CountdownCircleTimer>
       <div className="flex flex-col space-y-4">
         <Button onClick={startCountdown} disabled={isPlaying}>
-          Start Countdown
+          Start
         </Button>
       </div>
     </div>

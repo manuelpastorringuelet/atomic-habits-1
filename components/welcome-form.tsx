@@ -51,41 +51,52 @@ const WelcomeForm = () => {
 
   if (!isSubmitSuccessful) {
     return (
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>My name is:</FormLabel>
-                <FormControl>
-                  <Input placeholder="Cool Name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="processGoal"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  The most important process goal for me is:
-                </FormLabel>
-                <FormControl>
-                  <Input placeholder="Exercise every day" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button className="w-full" type="submit">
-            Submit
-          </Button>
-        </form>
-      </Form>
+      <div className="space-y-10">
+        <div>
+          <h2 className="text-center text-3xl font-extrabold text-gray-900">
+            Welcome to Atomic Habits
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            {`Let's get better 1% every day!`}
+          </p>
+        </div>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8 text-left"
+          >
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>My name is:</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Cool Name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="processGoal"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>My process goal is:</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Exercise every day" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button className="w-full" type="submit">
+              Submit
+            </Button>
+          </form>
+        </Form>
+      </div>
     );
   } else {
     return null;

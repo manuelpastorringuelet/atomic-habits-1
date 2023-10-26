@@ -31,26 +31,29 @@ export default function Home() {
   } = useStore();
 
   return (
-    <main className="container mt-20 flex max-h-screen flex-col items-center justify-center gap-2 overflow-hidden text-center">
+    <main className="container mt-10 flex h-full max-h-screen flex-col items-center justify-center gap-2 overflow-hidden text-center">
       <WelcomeModal />
       {username && processGoal && isClient && (
         <>
           {!isDailyChallengeCompleted && (
             <>
-              <h1>
-                Welcome back, <span className="font-bold">{username}</span>
-              </h1>
-              <h2>
-                Day {dayNumber} of {processGoal}
-              </h2>
-              <h3>
+              <div>
+                <h2 className="mt-8 text-center text-3xl font-extrabold text-gray-900">
+                  Welcome, {username}!
+                </h2>
+                <p className="mt-2 text-center text-sm text-gray-600">
+                  Day {dayNumber} of {processGoal}
+                </p>
+              </div>
+              <h2></h2>
+              <p className="mt-2 text-center text-sm text-gray-600">
                 {percentageIncreased <= 1
                   ? "You can do it!"
                   : `${Math.round(
                       percentageIncreased * 100,
                     )}% increase since your first day!`}
                 {}
-              </h3>
+              </p>
             </>
           )}
           <Countdown />
